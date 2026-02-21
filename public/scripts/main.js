@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initCursorTrail();
   initNavToggle();
   initScrollTop();
-  initLightbox();
   initVideoFacades();
 });
 
@@ -124,34 +123,4 @@ function initVideoFacades() {
   });
 }
 
-/* --- LIGHTBOX --- */
-function initLightbox() {
-  const lightbox = document.querySelector('.lightbox');
-  if (!lightbox) return;
-  const lightboxImg = lightbox.querySelector('img');
-  if (!lightboxImg) return;
 
-  const gallery = document.querySelector('.gallery');
-  if (!gallery) return;
-
-  gallery.addEventListener('click', (e) => {
-    const img = e.target.closest('.gallery-item img');
-    if (!img) return;
-    lightboxImg.src = img.src;
-    lightboxImg.alt = img.alt;
-    lightbox.classList.add('active');
-    lightbox.setAttribute('aria-hidden', 'false');
-  });
-
-  lightbox.addEventListener('click', () => {
-    lightbox.classList.remove('active');
-    lightbox.setAttribute('aria-hidden', 'true');
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-      lightbox.classList.remove('active');
-      lightbox.setAttribute('aria-hidden', 'true');
-    }
-  });
-}

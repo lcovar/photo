@@ -26,9 +26,9 @@
   --font-mono: 'Space Mono', 'Courier New', monospace;
   --max-width: 1200px;
   --z-stars: -1;
-  --z-header: 100;
+  --z-header: 10001;
   --z-scroll-top: 500;
-  --z-lightbox: 5000;
+  --z-lightbox: 10001;
   --z-scanlines: 9999;
   --z-cursor: 10000;
 }
@@ -792,6 +792,28 @@ body::after {
   max-height: 90%;
   border: 2px solid var(--color-border);
 }
+
+.lightbox-esc-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: var(--color-surface);
+  color: var(--color-red); /* Changed to red */
+  border: 2px solid var(--color-red); /* Changed to red */
+  padding: 8px 15px;
+  font-family: var(--font-pixel);
+  font-size: 16px;
+  cursor: pointer;
+  z-index: calc(var(--z-lightbox) + 1);
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.lightbox-esc-button:hover {
+  background: var(--color-red); /* Changed to red */
+  color: var(--color-bg);
+  border-color: var(--color-red); /* Changed to red */
+}
+
 
 /* --- LOADING SCREEN --- */
 .loading-screen {

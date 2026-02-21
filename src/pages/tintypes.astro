@@ -2,17 +2,13 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-import img1 from '../images/tins/1.jpg';
-import img2 from '../images/tins/2.jpg';
-import img3 from '../images/tins/3.jpg';
-import img4 from '../images/tins/4.jpg';
-import img5 from '../images/tins/5.jpg';
-import img6 from '../images/tins/6.jpg';
-import img7 from '../images/tins/7.jpg';
-import img8 from '../images/tins/8.jpg';
-import img9 from '../images/tins/9.jpg';
-
-const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9];
+const imageModules = import.meta.glob('../images/tins/*.jpg', { eager: true });
+const images = Object.entries(imageModules)
+  .map(([path, module]) => ({ originalPath: path, ...module }))
+  .sort((a, b) => {
+    const getNumber = (path) => parseInt(path.match(/(\d+)\.jpg$/)[1]);
+    return getNumber(a.originalPath) - getNumber(b.originalPath);
+  });
 ---
 
 <BaseLayout
@@ -34,7 +30,7 @@ const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9];
     <div class="gallery-grid">
       {images.map((img, i) => (
         <div class="gallery-item tintype-plate" tabindex="0">
-          <Image src={img} alt={`Plate ${String(i + 1).padStart(2, '0')}`} loading="lazy" />
+          <Image src={img.default} alt={`Plate ${String(i + 1).padStart(2, '0')}`} loading="lazy" />
           <div class="caption">PLATE {String(i + 1).padStart(2, '0')}</div>
           <div class="plate-border"></div>
         </div>

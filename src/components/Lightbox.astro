@@ -2,5 +2,54 @@
 ---
 
 <div class="lightbox" role="dialog" aria-label="Photo viewer" aria-hidden="true">
+  <button class="lightbox-esc-button" aria-label="Close image viewer">ESC</button>
   <img src="" alt="">
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const lightbox = document.querySelector('.lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const escButton = lightbox.querySelector('.lightbox-esc-button');
+
+    if (!lightbox || !lightboxImg || !escButton) return;
+
+    const closeLightbox = () => {
+      lightbox.classList.remove('active');
+      lightbox.setAttribute('aria-hidden', 'true');
+    };
+
+    const openLightbox = (src, alt) => {
+      lightboxImg.src = src;
+      lightboxImg.alt = alt;
+      lightbox.classList.add('active');
+      lightbox.setAttribute('aria-hidden', 'false');
+    };
+
+    // Event listener for opening the lightbox (delegated to document for dynamic content)
+    document.addEventListener('click', (e) => {
+      const img = e.target.closest('.gallery-item img');
+      if (img) {
+        openLightbox(img.src, img.alt);
+      }
+    });
+
+    // Event listener for clicking the lightbox itself (to close, "click anywhere")
+    lightbox.addEventListener('click', (e) => {
+      // Only close if clicking on the lightbox background, not the image or button
+      if (e.target === lightbox || e.target === escButton) {
+        closeLightbox();
+      }
+    });
+
+    // Event listener for the ESC button
+    escButton.addEventListener('click', closeLightbox);
+
+    // Event listener for the Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+  });
+</script>

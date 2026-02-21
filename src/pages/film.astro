@@ -1,5 +1,14 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const imageModules = import.meta.glob('../images/film/*.jpg', { eager: true });
+const images = Object.entries(imageModules)
+  .map(([path, module]) => ({ originalPath: path, ...module }))
+  .sort((a, b) => {
+    const getNumber = (path) => parseInt(path.match(/(\d+)\.jpg$/)[1]);
+    return getNumber(a.originalPath) - getNumber(b.originalPath);
+  });
 ---
 
 <BaseLayout
@@ -18,13 +27,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </section>
 
   <section class="gallery" aria-label="Film photography gallery">
-    <div class="placeholder-grid">
-      <div class="placeholder-item"><div class="placeholder-icon" aria-hidden="true">&#9634;</div>PHOTO 01</div>
-      <div class="placeholder-item"><div class="placeholder-icon" aria-hidden="true">&#9634;</div>PHOTO 02</div>
-      <div class="placeholder-item"><div class="placeholder-icon" aria-hidden="true">&#9634;</div>PHOTO 03</div>
-      <div class="placeholder-item"><div class="placeholder-icon" aria-hidden="true">&#9634;</div>PHOTO 04</div>
-      <div class="placeholder-item"><div class="placeholder-icon" aria-hidden="true">&#9634;</div>PHOTO 05</div>
-      <div class="placeholder-item"><div class="placeholder-icon" aria-hidden="true">&#9634;</div>PHOTO 06</div>
+    <div class="gallery-grid">
+      {images.map((img, i) => (
+        <div class="gallery-item" tabindex="0">
+          <Image src={img.default} alt={`Film Photo ${String(i + 1).padStart(2, '0')}`} loading="lazy" />
+          <div class="caption">FILM {String(i + 1).padStart(2, '0')}</div>
+        </div>
+      ))}
     </div>
   </section>
 </BaseLayout>
