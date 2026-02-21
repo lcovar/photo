@@ -1,42 +1,78 @@
 ---
 ---
 
-<div class="lightbox" role="dialog" aria-label="Photo viewer" aria-hidden="true">
-  <button class="lightbox-esc-button" aria-label="Close image viewer">ESC</button>
-  <img src="" alt="">
+<div class="lightbox" role="dialog" aria-label="Media viewer" aria-hidden="true">
+  <button class="lightbox-esc-button" aria-label="Close media viewer">ESC</button>
+  <div class="lightbox-content">
+    <img class="lightbox-image" src="" alt="">
+    <iframe
+      class="lightbox-video"
+      src=""
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted- भूकंप; picture-in-picture"
+      allowfullscreen
+      title="YouTube video player"
+      style="display: none;"
+    ></iframe>
+  </div>
 </div>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const lightbox = document.querySelector('.lightbox');
-    const lightboxImg = lightbox.querySelector('img');
+    const lightboxContent = lightbox.querySelector('.lightbox-content');
+    const lightboxImg = lightbox.querySelector('.lightbox-image');
+    const lightboxVideo = lightbox.querySelector('.lightbox-video');
     const escButton = lightbox.querySelector('.lightbox-esc-button');
 
-    if (!lightbox || !lightboxImg || !escButton) return;
+    if (!lightbox || !lightboxContent || !lightboxImg || !lightboxVideo || !escButton) return;
+
+    const clearLightbox = () => {
+      lightboxImg.src = '';
+      lightboxImg.alt = '';
+      lightboxImg.style.display = 'none';
+      lightboxVideo.src = '';
+      lightboxVideo.style.display = 'none';
+    };
 
     const closeLightbox = () => {
       lightbox.classList.remove('active');
       lightbox.setAttribute('aria-hidden', 'true');
+      clearLightbox();
     };
 
-    const openLightbox = (src, alt) => {
-      lightboxImg.src = src;
-      lightboxImg.alt = alt;
+    // Make closeLightbox accessible globally for other components (e.g., gallery items)
+    window.closeLightbox = closeLightbox;
+
+    const openLightbox = (type, src, alt, videoId) => {
+      clearLightbox(); // Clear previous content first
+      if (type === 'image') {
+        lightboxImg.src = src;
+        lightboxImg.alt = alt;
+        lightboxImg.style.display = 'block';
+      } else if (type === 'video') {
+        lightboxVideo.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+        lightboxVideo.title = alt; // Use alt as title for video
+        lightboxVideo.style.display = 'block';
+      }
       lightbox.classList.add('active');
       lightbox.setAttribute('aria-hidden', 'false');
     };
+
+    // Make openLightbox accessible globally for other components (e.g., gallery items)
+    window.openLightbox = openLightbox;
 
     // Event listener for opening the lightbox (delegated to document for dynamic content)
     document.addEventListener('click', (e) => {
       const img = e.target.closest('.gallery-item img');
       if (img) {
-        openLightbox(img.src, img.alt);
+        openLightbox('image', img.src, img.alt);
       }
     });
 
     // Event listener for clicking the lightbox itself (to close, "click anywhere")
     lightbox.addEventListener('click', (e) => {
-      // Only close if clicking on the lightbox background, not the image or button
+      // Only close if clicking on the lightbox background, not the image, video, or button
       if (e.target === lightbox || e.target === escButton) {
         closeLightbox();
       }
@@ -53,3 +89,33 @@
     });
   });
 </script>
+
+<style>
+  /* Basic styling for lightbox content, ensures correct display */
+  .lightbox-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 90%;
+    max-height: 90%;
+    width: 100%; /* Ensure content takes available width */
+    height: 100%; /* Ensure content takes available height */
+    position: relative; /* For image/video positioning */
+  }
+
+  .lightbox-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Ensure image fits without cropping */
+    display: none; /* Hidden by default */
+  }
+
+  .lightbox-video {
+    width: 100%;
+    height: 100%;
+    max-width: 90vw; /* Limit video width */
+    max-height: 90vh; /* Limit video height */
+    aspect-ratio: 16 / 9; /* Common video aspect ratio */
+    display: none; /* Hidden by default */
+  }
+</style>

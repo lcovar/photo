@@ -1,12 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import VideoFacade from '../components/VideoFacade.astro';
 ---
 
 <BaseLayout
   title="Super 8 | discontinuity"
   description="Super 8 motion film by discontinuity. Analog moving images on celluloid."
   currentPage="super8"
+  showLightbox={true}
 >
   <header class="page-header super8">
     <h1>SUPER 8</h1>
@@ -18,10 +18,21 @@ import VideoFacade from '../components/VideoFacade.astro';
   </section>
 
   <section class="video-grid" aria-label="Super 8 reels">
-    <VideoFacade videoId="-FcJp-N7r4k" title="Reel 01" />
-    <VideoFacade videoId="pVrz0t1XTAw" title="Reel 02" />
-    <VideoFacade videoId="FrWyn99WR90" title="Reel 03" />
-    <VideoFacade videoId="dJwZ_MMfmUo" title="Reel 04" />
-    <VideoFacade videoId="e0t4Pe7a-Hs" title="Reel 05" />
+    {
+      [
+        { id: '-FcJp-N7r4k', title: 'Reel 01' },
+        { id: 'pVrz0t1XTAw', title: 'Reel 02' },
+        { id: 'FrWyn99WR90', title: 'Reel 03' },
+        { id: 'dJwZ_MMfmUo', title: 'Reel 04' },
+        { id: 'e0t4Pe7a-Hs', title: 'Reel 05' },
+      ].map((video) => (
+        <div class="video-item" tabindex="0" onclick={`window.openLightbox('video', null, '${video.title}', '${video.id}')`}>
+          <div class="video-thumbnail-container">
+            <img src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`} alt={`Thumbnail for ${video.title}`} />
+            <div class="video-play-btn">PLAY</div>
+          </div>
+          <div class="video-title">{video.title}</div>
+        </div>
+      ))
+    }
   </section>
-</BaseLayout>
