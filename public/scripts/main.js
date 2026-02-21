@@ -1,5 +1,5 @@
 /* ============================================
-   discontinuity. — 90s Retro Effects
+   discontinuity. — 90s Retro Effect
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
