@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import VideoFacade from '../components/VideoFacade.astro';
+---
+
+<BaseLayout
+  title="Super 8 | discontinuity"
+  description="Super 8 motion film by discontinuity. Analog moving images on celluloid."
+  currentPage="super8"
+>
+  <header class="page-header super8">
+    <h1>SUPER 8</h1>
+    <p>Motion Film</p>
+  </header>
+
+  <section class="info-block">
+    <p>Super 8 is motion picture film at its most intimate. The texture, the warmth, the soft flicker of celluloid in motion&mdash;it captures time the way memory feels. Each cartridge holds three minutes and twenty seconds. No second takes. Just light through a gate and chemistry doing the rest.</p>
+  </section>
+
+  <section class="video-grid" aria-label="Super 8 reels">
+    <VideoFacade videoId="-FcJp-N7r4k" title="Reel 01" />
+    <VideoFacade videoId="pVrz0t1XTAw" title="Reel 02" />
+    <VideoFacade videoId="FrWyn99WR90" title="Reel 03" />
+    <VideoFacade videoId="dJwZ_MMfmUo" title="Reel 04" />
+    <VideoFacade videoId="e0t4Pe7a-Hs" title="Reel 05" />
+  </section>
+</BaseLayout>

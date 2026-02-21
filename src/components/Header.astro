@@ -1,0 +1,27 @@
+---
+interface Props {
+  currentPage?: string;
+}
+
+const { currentPage } = Astro.props;
+const base = import.meta.env.BASE_URL;
+
+const links = [
+  { href: `${base}film.html`, label: 'FILM', id: 'film' },
+  { href: `${base}tintypes.html`, label: 'TINTYPES', id: 'tintypes' },
+  { href: `${base}super8.html`, label: 'SUPER 8', id: 'super8' },
+  { href: `${base}pricing.html`, label: 'PRICING', id: 'pricing' },
+];
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href={base} class="site-title">discontinuity</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle navigation">[=]</button>
+    <nav id="main-nav" class="nav-links" aria-label="Main navigation">
+      {links.map(link => (
+        <a href={link.href} {...(currentPage === link.id ? { 'aria-current': 'page' } : {})}>{link.label}</a>
+      ))}
+    </nav>
+  </div>
+</header>

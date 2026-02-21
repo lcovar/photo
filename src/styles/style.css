@@ -1,5 +1,5 @@
 /* ============================================
-   LC PHOTO — 90s Retro Photography
+   discontinuity — 90s Retro Photography
    ============================================ */
 
 @charset "UTF-8";
@@ -562,6 +562,8 @@ body::after {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 3px;
+  position: relative;
+  z-index: calc(var(--z-scanlines) + 1);
 }
 
 .gallery-item {
@@ -611,6 +613,35 @@ body::after {
 
 .gallery-item:hover .caption {
   transform: translateY(0);
+}
+
+/* --- TINTYPE PLATES --- */
+.tintype-plate {
+  background: #111;
+  border: 3px solid #444;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8), 0 0 0 1px #222;
+}
+
+.tintype-plate img {
+  filter: none;
+}
+
+.tintype-plate:hover img {
+  filter: none;
+  transform: scale(1.03);
+}
+
+.plate-border {
+  display: none;
+}
+
+.tintype-plate .caption {
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--color-yellow);
+  background: rgba(0, 0, 0, 0.9);
+  border-top: 1px solid var(--color-yellow);
 }
 
 /* --- PLACEHOLDER (for empty galleries) --- */
@@ -837,6 +868,69 @@ body::after {
 
 .video-item .placeholder-item {
   aspect-ratio: 16/9;
+}
+
+/* --- VIDEO FACADE (custom YouTube thumbnail) --- */
+.video-facade {
+  position: relative;
+  aspect-ratio: 16/9;
+  cursor: pointer;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+.video-facade img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%) contrast(1.1) brightness(0.8);
+  transition: filter 0.2s;
+}
+
+.video-facade:hover img {
+  filter: grayscale(20%) contrast(1.1) brightness(0.9);
+}
+
+.video-scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+.video-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-terminal);
+  font-size: 24px;
+  color: var(--color-green);
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid var(--color-green);
+  padding: 10px 24px;
+  letter-spacing: 3px;
+  white-space: nowrap;
+  transition: background-color 0.15s, color 0.15s;
+  z-index: 1;
+}
+
+.video-facade:hover .video-play-btn {
+  background: var(--color-green);
+  color: var(--color-bg);
+  text-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-facade img {
+    transition: none;
+  }
 }
 
 .video-item .video-title {

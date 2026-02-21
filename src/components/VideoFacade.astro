@@ -1,0 +1,17 @@
+---
+interface Props {
+  videoId: string;
+  title: string;
+}
+
+const { videoId, title } = Astro.props;
+---
+
+<article class="video-item">
+  <div class="video-facade" data-video-id={videoId} role="button" tabindex="0" aria-label={`Play ${title}`}>
+    <img src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`} alt={`${title} thumbnail`} loading="lazy">
+    <div class="video-play-btn">[ &#9655; PLAY ]</div>
+    <div class="video-scanlines"></div>
+  </div>
+  <div class="video-title">{title}</div>
+</article>

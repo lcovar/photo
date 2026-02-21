@@ -1,5 +1,5 @@
 /* ============================================
-   LC PHOTO — 90s Retro Effects
+   discontinuity. — 90s Retro Effects
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initCursorTrail();
   initNavToggle();
   initScrollTop();
-  initHitCounter();
   initLightbox();
+  initVideoFacades();
 });
 
 /* --- STAR BACKGROUND --- */
@@ -90,16 +90,6 @@ function initScrollTop() {
   });
 }
 
-/* --- FAKE HIT COUNTER --- */
-function initHitCounter() {
-  const counter = document.querySelector('.hit-counter');
-  if (!counter) return;
-  const base = 4827;
-  const days = Math.floor((Date.now() - new Date('2024-01-01').getTime()) / 86400000);
-  const hits = base + days * 3 + Math.floor(Math.random() * 5);
-  counter.textContent = String(hits).padStart(7, '0');
-}
-
 /* --- LOADING SCREEN --- */
 function initLoadingScreen() {
   const screen = document.querySelector('.loading-screen');
@@ -109,6 +99,29 @@ function initLoadingScreen() {
     screen.classList.add('fade-out');
     setTimeout(() => screen.remove(), 400);
   }, 1000);
+}
+
+/* --- VIDEO FACADE (click-to-play YouTube) --- */
+function initVideoFacades() {
+  document.querySelectorAll('.video-facade').forEach((facade) => {
+    const handler = () => {
+      const videoId = facade.dataset.videoId;
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1';
+      iframe.title = facade.getAttribute('aria-label');
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+      iframe.setAttribute('allowfullscreen', '');
+      facade.replaceWith(iframe);
+    };
+    facade.addEventListener('click', handler);
+    facade.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        handler();
+      }
+    });
+  });
 }
 
 /* --- LIGHTBOX --- */

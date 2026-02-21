@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Film | discontinuity"
+  description="Film photography by discontinuity. 35mm, 120, and large format analog work."
+  currentPage="film"
+  showLightbox={true}
+>
+  <header class="page-header film">
+    <h1>FILM</h1>
+    <p>35mm / 120 / Large Format</p>
+  </header>
+
+  <section class="info-block">
+    <p>Shooting on analog film is a practice in patience and trust. There is beauty in the grain, the unpredictable light leaks, and the quiet ritual of the chemical process. Each frame is finite&mdash;no chimping, no do-overs. You learn to see before you press the shutter.</p>
+  </section>
+
+  <section class="gallery" aria-label="Film photography gallery">
+    <div class="placeholder-grid">
+      <div class="placeholder-item"><div class="placeholder-icon" aria-hidden="true">&#9634;</div>PHOTO 01</div>
+      <div class="placeholder-item"><div class="placeholder-icon" aria-hidden="true">&#9634;</div>PHOTO 02</div>
+      <div class="placeholder-item"><div class="placeholder-icon" aria-hidden="true">&#9634;</div>PHOTO 03</div>
+      <div class="placeholder-item"><div class="placeholder-icon" aria-hidden="true">&#9634;</div>PHOTO 04</div>
+      <div class="placeholder-item"><div class="placeholder-icon" aria-hidden="true">&#9634;</div>PHOTO 05</div>
+      <div class="placeholder-item"><div class="placeholder-icon" aria-hidden="true">&#9634;</div>PHOTO 06</div>
+    </div>
+  </section>
+</BaseLayout>

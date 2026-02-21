@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="discontinuity — Film / Tintypes / Super 8"
+  description="discontinuity — analog photography portfolio. Film, tintypes, and Super 8 motion film."
+  showLoadingScreen={true}
+  showMarquee={true}
+>
+  <section class="hero">
+    <h1 class="hero-title">discontinuity</h1>
+    <p class="hero-subtitle">FILM / TINTYPES / SUPER 8</p>
+    <hr class="hero-divider">
+  </section>
+
+  <div class="ascii-border" aria-hidden="true">+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+</div>
+
+  <section class="section-links" aria-label="Browse work">
+    <a href={`${import.meta.env.BASE_URL}film.html`} class="section-card">
+      <span class="section-card-number">01</span>
+      <h2>Film</h2>
+      <p>35mm and medium format film photography. Portra, Tri-X, and everything in between.</p>
+      <span class="enter-text" aria-hidden="true">[ ENTER ]</span>
+    </a>
+    <a href={`${import.meta.env.BASE_URL}tintypes.html`} class="section-card">
+      <span class="section-card-number">02</span>
+      <h2>Tintypes</h2>
+      <p>Wet plate collodion tintypes. An antique process producing one-of-a-kind images on metal.</p>
+      <span class="enter-text" aria-hidden="true">[ ENTER ]</span>
+    </a>
+    <a href={`${import.meta.env.BASE_URL}super8.html`} class="section-card">
+      <span class="section-card-number">03</span>
+      <h2>Super 8</h2>
+      <p>Super 8 motion film. Moving images with analog warmth and texture.</p>
+      <span class="enter-text" aria-hidden="true">[ ENTER ]</span>
+    </a>
+  </section>
+</BaseLayout>

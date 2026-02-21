@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Pricing | discontinuity"
+  description="discontinuity pricing. Rates for film sessions, tintype plates, and Super 8 motion film."
+  currentPage="pricing"
+>
+  <header class="page-header pricing">
+    <h1>PRICING</h1>
+    <p>Rates &amp; Packages</p>
+  </header>
+
+  <section class="info-block">
+    <p>Every project is different. Below are starting rates for each medium. Reach out for custom quotes, event coverage, or multi-format packages.</p>
+  </section>
+
+  <section class="pricing-tables" aria-label="Pricing">
+
+    <div class="price-table-block">
+      <h2 class="price-table-title film-accent">01 // FILM</h2>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>PACKAGE</th>
+            <th>INCLUDES</th>
+            <th>RATE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1-Hour Session</td>
+            <td>35mm or 120 &bull; film &amp; dev included &bull; high-res scans &bull; online gallery</td>
+            <td class="price-cell">$500</td>
+          </tr>
+          <tr>
+            <td>Wedding</td>
+            <td>8 hours coverage &bull; film + digital &bull; 35mm + 120 &bull; all film &amp; dev &bull; high-res scans &bull; online gallery &bull; print consultation</td>
+            <td class="price-cell">$3,500</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="price-table-block">
+      <h2 class="price-table-title tintypes-accent">02 // TINTYPES</h2>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>SIZE</th>
+            <th>INCLUDES</th>
+            <th>RATE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>5&times;7</td>
+            <td>Wet plate collodion &bull; one-of-a-kind plate &bull; varnish finish &bull; keep the original</td>
+            <td class="price-cell">$80</td>
+          </tr>
+          <tr>
+            <td>8&times;10</td>
+            <td>Wet plate collodion &bull; one-of-a-kind plate &bull; varnish finish &bull; keep the original</td>
+            <td class="price-cell">$150</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="price-table-note">* On location or studio. Additional plates discounted.</p>
+    </div>
+
+    <div class="price-table-block">
+      <h2 class="price-table-title super8-accent">03 // SUPER 8</h2>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>PACKAGE</th>
+            <th>INCLUDES</th>
+            <th>RATE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Single Reel</td>
+            <td>One cartridge (3 min) &bull; Kodak stock &bull; processing &amp; scan &bull; digital transfer</td>
+            <td class="price-cell">$500</td>
+          </tr>
+          <tr>
+            <td>Wedding</td>
+            <td>6 hours coverage &bull; 2 cartridges &bull; Kodak stock &bull; processing &amp; scan &bull; edited highlight reel &bull; all raw transfers</td>
+            <td class="price-cell">$2,500</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="price-table-note">* Additional cartridges available at cost.</p>
+    </div>
+
+  </section>
+
+  <div class="ascii-border" aria-hidden="true">+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+</div>
+
+  <section class="info-block">
+    <p>All prices in USD. Travel fees may apply for locations outside the local area.</p>
+    <p><a href="mailto:hello@discontinuity.com" class="pricing-cta">[ INQUIRE ]</a></p>
+  </section>
+</BaseLayout>

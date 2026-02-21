@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+import img1 from '../images/tins/1.jpg';
+import img2 from '../images/tins/2.jpg';
+import img3 from '../images/tins/3.jpg';
+import img4 from '../images/tins/4.jpg';
+import img5 from '../images/tins/5.jpg';
+import img6 from '../images/tins/6.jpg';
+import img7 from '../images/tins/7.jpg';
+import img8 from '../images/tins/8.jpg';
+import img9 from '../images/tins/9.jpg';
+
+const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9];
+---
+
+<BaseLayout
+  title="Tintypes | discontinuity"
+  description="Tintype photography by discontinuity. Wet plate collodion — one-of-a-kind images on metal."
+  currentPage="tintypes"
+  showLightbox={true}
+>
+  <header class="page-header tintypes">
+    <h1>TINTYPES</h1>
+    <p>Wet Plate Collodion</p>
+  </header>
+
+  <section class="info-block">
+    <p>The tintype process &mdash; wet plate collodion is photography at its most elemental. Each plate is hand-poured with collodion, sensitized in silver nitrate, exposed while still wet, and developed on the spot. The result is a one-of-a-kind image captured directly on metal, unrepeatable and alive with imperfection.</p>
+  </section>
+
+  <section class="gallery" aria-label="Tintype photography gallery">
+    <div class="gallery-grid">
+      {images.map((img, i) => (
+        <div class="gallery-item tintype-plate" tabindex="0">
+          <Image src={img} alt={`Plate ${String(i + 1).padStart(2, '0')}`} loading="lazy" />
+          <div class="caption">PLATE {String(i + 1).padStart(2, '0')}</div>
+          <div class="plate-border"></div>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
